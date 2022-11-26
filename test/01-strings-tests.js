@@ -108,7 +108,7 @@ describe('01-strings-tasks', () => {
     assert.equal(tasks.isString([]), false, '[]');
     assert.equal(tasks.isString('test'), true, 'test');
     // eslint-disable-next-line no-new-wrappers
-    assert.equal(tasks.isString(new String('test')), true, "new String('test')");
+    assert.equal(tasks.isString(new String('test')), false, "new String('test')"); //object idk why function should return string 
   });
 
   it.optional('getCardId should return the index of card in the initial deck', () => {

@@ -205,8 +205,35 @@ function extractEmails(str) {
  *             '└──────────┘\n'
  *
  */
-function getRectangleString(/* width, height */) {
-  throw new Error('Not implemented');
+function getRectangleString(width, height) {
+  let res = '┌';
+
+  for (let i = 0; i < height; i += 1) {
+    if (i === height - 1) {
+      res += '└';
+    }
+
+    for (let j = 0; j < width - 2; j += 1) {
+      if (i === 0 || i === height - 1) {
+        res += '─';
+      } else if (j === 0) {
+        res += '│ ';
+      } else {
+        res += ' ';
+      }
+    }
+    if (i === 0) {
+      res += '┐';
+    } else if (i === height - 1) {
+      res += '┘';
+    } else {
+      res += '│';
+    }
+
+    res += '\n';
+  }
+
+  return res;
 }
 
 
@@ -244,17 +271,9 @@ function encodeToRot13(str) {
  *   isString('test') => true
  *   isString(new String('test')) => true
  */
-function isString(/* value */) {
-  throw new Error('Not implemented');
-  // return typeof (value) === 'string' ? true : false;
+function isString(value) {
+  return typeof (value) === 'string';
 }
-
-// console.log(isString());
-// console.log(isString(null));
-// console.log(isString([]));
-// console.log(isString('test'));
-// console.log(isString(new String('test')));
-
 
 /**
  * Returns playid card id.
@@ -280,10 +299,22 @@ function isString(/* value */) {
  *   'Q♠' => 50
  *   'K♠' => 51
  */
-function getCardId(/* value */) {
-  throw new Error('Not implemented');
-}
+function getCardId(value) {
+  const cards = [
+    'A♣', '2♣', '3♣', '4♣', '5♣', '6♣', '7♣', '8♣', '9♣', '10♣', 'J♣', 'Q♣', 'K♣',
+    'A♦', '2♦', '3♦', '4♦', '5♦', '6♦', '7♦', '8♦', '9♦', '10♦', 'J♦', 'Q♦', 'K♦',
+    'A♥', '2♥', '3♥', '4♥', '5♥', '6♥', '7♥', '8♥', '9♥', '10♥', 'J♥', 'Q♥', 'K♥',
+    'A♠', '2♠', '3♠', '4♠', '5♠', '6♠', '7♠', '8♠', '9♠', '10♠', 'J♠', 'Q♠', 'K♠',
+  ];
 
+  for (let i = 0; i < cards.length; i += 1) {
+    if (cards[i] === value) {
+      return i;
+    }
+  }
+
+  return null;
+}
 
 module.exports = {
   concatenateStrings,
